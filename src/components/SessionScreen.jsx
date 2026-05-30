@@ -18,6 +18,8 @@ export default function SessionScreen({ sessionLength, ruleStats, recordIdentify
   const [stage1WrongChoice, setStage1WrongChoice] = useState(null);
   const [localResults, setLocalResults] = useState([]);
   const [identifyCorrectThisQ, setIdentifyCorrectThisQ] = useState(null);
+  const [lastCorrectAnswer, setLastCorrectAnswer] = useState(null);
+  const [lastExplanation, setLastExplanation] = useState(null);
 
   useEffect(() => { startSession(); }, []);
 
@@ -48,6 +50,9 @@ export default function SessionScreen({ sessionLength, ruleStats, recordIdentify
     recordApply(targetRuleId, true);
     const result = { ruleId: targetRuleId, identifyCorrect: identifyCorrectThisQ, applyCorrect: true };
     setLocalResults(prev => [...prev, result]);
+    const correct = question?.stage2choices?.find(c => c.isCorrect);
+    setLastCorrectAnswer(correct?.text || null);
+    setLastExplanation(question?.explanation?.correct || null);
     setStage('rulecard');
   }
 
@@ -55,6 +60,9 @@ export default function SessionScreen({ sessionLength, ruleStats, recordIdentify
     recordApply(targetRuleId, false);
     const result = { ruleId: targetRuleId, identifyCorrect: identifyCorrectThisQ, applyCorrect: false };
     setLocalResults(prev => [...prev, result]);
+    const correct = question?.stage2choices?.find(c => c.isCorrect);
+    setLastCorrectAnswer(correct?.text || null);
+    setLastExplanation(question?.explanation?.correct || null);
     setStage('rulecard');
   }
 
@@ -142,7 +150,8 @@ export default function SessionScreen({ sessionLength, ruleStats, recordIdentify
       {stage === 'rulecard' && question && (
         <RuleCard
           ruleId={targetRuleId}
-          exampleText={question.passage?.replace(/\[U\]|\[\/U\]/g, '')}
+          correctAnswerText={lastCorrectAnswer}
+          explanation={lastExplanation}
           identifyAccuracy={idAcc}
           applyAccuracy={apAcc}
           onNext={handleRuleCardNext}

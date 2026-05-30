@@ -5,6 +5,7 @@ import HomeScreen from './components/HomeScreen.jsx';
 import SessionScreen from './components/SessionScreen.jsx';
 import StatsScreen from './components/StatsScreen.jsx';
 import SettingsScreen from './components/SettingsScreen.jsx';
+import RuleBookScreen from './components/RuleBookScreen.jsx';
 
 export default function App() {
   const [screen, setScreen] = useState('home');
@@ -40,6 +41,7 @@ export default function App() {
           onStartSession={() => setScreen('session')}
           onStats={() => setScreen('stats')}
           onSettings={() => setScreen('settings')}
+          onRuleBook={() => setScreen('rulebook')}
         />
       )}
 
@@ -59,6 +61,10 @@ export default function App() {
 
       {screen === 'settings' && (
         <SettingsScreen onBack={() => setScreen('home')} onResetStats={resetStats} />
+      )}
+
+      {screen === 'rulebook' && (
+        <RuleBookScreen onBack={() => setScreen('home')} />
       )}
     </div>
   );

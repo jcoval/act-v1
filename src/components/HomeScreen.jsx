@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { loadStreak } from '../hooks/useStats.js';
 import { RULES, FAMILY_COLORS } from '../data/rules.js';
 
-export default function HomeScreen({ ruleStats, onStartSession, onStats, onSettings }) {
+export default function HomeScreen({ ruleStats, onStartSession, onStats, onSettings, onRuleBook }) {
   const streak = loadStreak();
 
   return (
@@ -44,13 +44,22 @@ export default function HomeScreen({ ruleStats, onStartSession, onStats, onSetti
         Start Session
       </button>
 
-      <button
-        onClick={onStats}
-        className="w-full py-4 rounded-2xl font-semibold text-primaryText"
-        style={{ backgroundColor: '#16213e', border: '1px solid #2d3748', minHeight: '56px' }}
-      >
-        View Stats
-      </button>
+      <div className="flex gap-3">
+        <button
+          onClick={onStats}
+          className="flex-1 py-4 rounded-2xl font-semibold text-primaryText"
+          style={{ backgroundColor: '#16213e', border: '1px solid #2d3748', minHeight: '56px' }}
+        >
+          View Stats
+        </button>
+        <button
+          onClick={onRuleBook}
+          className="flex-1 py-4 rounded-2xl font-semibold text-primaryText"
+          style={{ backgroundColor: '#16213e', border: '1px solid #2d3748', minHeight: '56px' }}
+        >
+          📖 Rule Book
+        </button>
+      </div>
     </div>
   );
 }
