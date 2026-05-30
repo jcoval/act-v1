@@ -9,6 +9,8 @@ The passage must be original (not from any real ACT test), 2-5 sentences, in ACT
 For grammar/punctuation questions: embed the underlined portion using [U] and [/U] markers.
 For rhetoric questions (rules starting with R): write a passage without underlines, and include a "prompt" field with the question stem.
 
+When the correct answer is NO CHANGE: design the underlined portion so that a small, obvious modification (e.g. removing a comma, changing a word) would clearly violate the target rule. This ensures Stage 1 (rule identification) has an unambiguous answer even when the original text is already correct.
+
 The JSON must exactly match this schema — no extra fields:
 {
   "passage": "string with [U]underlined[/U] portion marked, or plain passage for rhetoric",
