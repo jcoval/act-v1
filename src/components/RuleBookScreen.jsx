@@ -48,7 +48,19 @@ export default function RuleBookScreen({ onBack }) {
                       {isOpen && (
                         <div className="px-4 pb-4">
                           <div className="h-px mb-3" style={{ backgroundColor: color + '30' }} />
-                          <p className="text-secondaryText text-sm leading-relaxed">{rule.card}</p>
+                          <p className="text-secondaryText text-sm leading-relaxed mb-3">{rule.card}</p>
+                          {rule.examples?.map((ex, i) => (
+                            <div key={i} className="mb-2 rounded-xl overflow-hidden text-sm">
+                              <div className="flex items-start gap-2 bg-red-900/20 px-3 py-2">
+                                <span className="text-accent font-bold flex-shrink-0 mt-0.5">✗</span>
+                                <span className="text-primaryText italic">{ex.wrong}</span>
+                              </div>
+                              <div className="flex items-start gap-2 bg-green-900/20 px-3 py-2">
+                                <span className="font-bold flex-shrink-0 mt-0.5" style={{ color: '#0f9b58' }}>✓</span>
+                                <span className="text-primaryText italic">{ex.right}</span>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       )}
                     </button>
